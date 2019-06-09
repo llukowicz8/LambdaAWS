@@ -1,40 +1,36 @@
-package com.mycompany.app;
+package com.agh.flightApp;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 
 
+public class AirCraftDataSaver implements RequestHandler<Request, Response> {
 
-public class AirCraftDataSaver implements RequestHandler<CountryRequest, CountryResponse> {
+    static final Logger logger = Logger.getLogger(AirCraftDataSaver.class);
 
     @Override
-    public CountryResponse handleRequest(CountryRequest input, Context context) {
+    public Response handleRequest(Request input, Context context) {
+        BasicConfigurator.configure();
+        Response response = new Response();
         URL url, fluxUrl;
         int samolotyWPowietrzu = 0;
         int samolotyNaZiemi = 0;
         float topSpeed = 0.0f;
         float topAltitude = 0.0f;
-        CountryResponse countryResponse = new CountryResponse();
         try {
             url = new URL("https://opensky-network.org/api/states/all");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-
             int status = con.getResponseCode();
 
             if (status == 200) {
@@ -61,70 +57,43 @@ public class AirCraftDataSaver implements RequestHandler<CountryRequest, Country
                         samolotyWPowietrzu++;
                     }
                     try {
-                        float predkosc = values.getFloat(9);
-                        if (predkosc > topSpeed) {
-                            topSpeed = predkosc;
-                        }
+                        Optional<Float> predkosc = Optional.of(values.getFloat(9));
+                        topSpeed = predkosc.isPresent() ? Math.max(predkosc.get(), topSpeed) : topSpeed;
 
-                    } catch (Exception e) {
-
+                    } catch (JSONException e) {
+                        logger.error("Problem with parse speed " + e.getMessage());
                     }
                     try {
-                        float wysokosc = values.getFloat(13);
-                        if (wysokosc > topAltitude) {
-                            topAltitude = wysokosc;
-                        }
+                        Optional<Float> wysokosc = Optional.of(values.getFloat(13));
+                        topAltitude = wysokosc.isPresent() ? Math.max(wysokosc.get(), topAltitude) : topAltitude;
 
-                    } catch (Exception e) {
-                        //e.printStackTrace();
+                    } catch (JSONException e) {
+                        logger.error("Problem with parse altitude " + e.getMessage());
                     }
-
                 }
-
             }
-
-
-        } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } finally {
-            //in.close();
-        }
-
-
-        try {
             fluxUrl = new URL("http://ec2-54-93-232-40.eu-central-1.compute.amazonaws.com:8086/write?db=testDb");
             HttpURLConnection con2 = (HttpURLConnection) fluxUrl.openConnection();
             con2.setDoOutput(true);
             con2.setRequestMethod("POST");
 
-            float topSpeedKmH = (topSpeed/10)*36;
+            float topSpeedKmH = (topSpeed / 10) * 36;
 
-            // Send post request
             OutputStream os = con2.getOutputStream();
             OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
-            osw.write("samoloty,region=swiat naZiemi=" + samolotyNaZiemi+",wPowietrzu="+samolotyWPowietrzu+",topSpeed="+topSpeedKmH+",topAltitude="+topAltitude);
+            osw.write("samoloty,region=swiat naZiemi=" + samolotyNaZiemi + ",wPowietrzu=" + samolotyWPowietrzu + ",topSpeed=" + topSpeedKmH + ",topAltitude=" + topAltitude);
             osw.flush();
             osw.close();
             os.close();  //don't forget to close the OutputStream
             con2.connect();
-            int responseCode = con2.getResponseCode();
-            String responseMessage = con2.getResponseMessage();
-            System.out.println("Response code  "+responseCode);
-            System.out.println("Response msg  "+responseMessage);
-
-            countryResponse.setMessage(responseMessage);
+            response.setMessage(con2.getResponseMessage());
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Problem with connection "+ e.getMessage());
         }
 
-
-        return countryResponse;
+        return response;
 
     }
+
 }

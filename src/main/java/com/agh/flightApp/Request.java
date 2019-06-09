@@ -1,6 +1,7 @@
-package com.mycompany.app;
+package com.agh.flightApp;
 
-public class CountryResponse {
+public class Request {
+
     private String message;
 
     public String getMessage() {
