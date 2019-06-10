@@ -14,7 +14,7 @@ Aplikacja umożliwia odczytanie z wykresów takich statystyk jak:
 - wysokość samolotu lecącego najwyżej nad danym krajem
 - szybkość najszybszego samolotu lecącego nad danym krajem
 
-# Technologie
+# Technologie i użyte narzędzia
 
 Aplikacja korzysta z możliwości Amazon Web Services (AWS)
 Wykorzystane komponenty AWS :
@@ -22,11 +22,14 @@ Wykorzystane komponenty AWS :
 * Amazon Elastic Compute Cloud (EC2)
 * Lambda Functions
 * API Gateway
+* S3
 
 Ponadto wykorzystane zostały takie technologie jak :
 
 * Grafana
 * InfluxDb
+
+Aplikacja jest zasilana danymi pozyskanymi z [OpenSky REST API](https://opensky-network.org/apidoc/rest.html#)
 
 ### EC2
 Serwis dostarczający skalowalną moc obliczeniową w chmurze. Dostęp jest realizowny poprzez 
@@ -36,8 +39,7 @@ Instalacja jest prosta i polega na wybraniu obrazu systemu, następnie jego inst
 dostosowanie reguł bezpieczeństwa do własnych potrzeb tak, aby użyte komponenety mogły się komunikować ze sobą
 
 
-
-### Lambda Functions
+### Funkcja lambda
 AWS Lambda to serwis umożliwiający przetwarzanie w chmurze, który pozwala na uruchamianie funkcji bez potrzeby 
 stawiania serwera i zarządzania nim. Zasoby są używane tylko wtedy, gdy funkcja lambda jest uruchamiana. 
 Bardzo pożyteczną cechą funkcji lambda jest skalowalność, funkcja automatycznie wykrywa potrzebę użycia większej ilości 
