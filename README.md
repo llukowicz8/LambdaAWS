@@ -48,4 +48,4 @@ mvn clean package shade:shade
 
 # Wygląd aplikacji
 
-![alt text](https://raw.githubusercontent.com/llukowicz8/LambdaAWS/blob/master/wygladAplikacji.png)
+![wygladAplikacji.png](https://github.com/llukowicz8/LambdaAWS/blob/master/wygladAplikacji.png)
