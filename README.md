@@ -38,7 +38,6 @@ szerokie możliwości dostosowania do własnych potrzeb i uruchamiania na nich w
 Instalacja jest prosta i polega na wybraniu obrazu systemu, następnie jego instalacji. Kolejnym krokiem jest
 dostosowanie reguł bezpieczeństwa do własnych potrzeb tak, aby użyte komponenety mogły się komunikować ze sobą
 
-
 ### Funkcja Lambda
 AWS Lambda to serwis umożliwiający przetwarzanie w chmurze, który pozwala na uruchamianie funkcji bez potrzeby 
 stawiania serwera i zarządzania nim. Zasoby są używane tylko wtedy, gdy funkcja lambda jest uruchamiana. 
@@ -51,10 +50,11 @@ Amazon API Gateway jest serwisem, który umożliwia tworzenie, zarządzanie i mo
 Serwis pozwala na integracje systemów zewnętrznych z systemami AWS-owymi. API Gateway zarządza ruchem,
 autoryzuje końcowych użytkowników oraz pozwala na monitorowanie wywołań API
 
+### OpenSky REST API
+Sieć OpenSky została zainicjowana w 2012 r. przez naukowców z armasuisse (Szwajcaria), Uniwersytetu Kaiserslautern (Niemcy) i University of Oxford (UK). Celem było i nadal jest ostarczanie naukowcom wysokiej jakości danych o ruchu lotniczym. Obecnie sieć OpenSky stała się stowarzyszeniem non-profit z siedzibą w Szwajcarii i jest wspierana przez rosnącą liczbę kontrybutorów z przemysłu i środowisk akademickich. Naukowcy z różnych obszarów korzystają z danych dostarczanych przez ludzi z całego świata.
 
-
-
-
+Poniższa mapa pokazuje zasięg OpenSky, stan na 9.06.2019.
+![zasiegOpenSky.png](https://github.com/llukowicz8/LambdaAWS/blob/master/zasiegOpenSky.png)
 
 # Architektura
 
