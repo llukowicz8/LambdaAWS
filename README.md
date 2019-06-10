@@ -39,12 +39,22 @@ Instalacja jest prosta i polega na wybraniu obrazu systemu, następnie jego inst
 dostosowanie reguł bezpieczeństwa do własnych potrzeb tak, aby użyte komponenety mogły się komunikować ze sobą
 
 
-### Funkcja lambda
+### Funkcja Lambda
 AWS Lambda to serwis umożliwiający przetwarzanie w chmurze, który pozwala na uruchamianie funkcji bez potrzeby 
 stawiania serwera i zarządzania nim. Zasoby są używane tylko wtedy, gdy funkcja lambda jest uruchamiana. 
 Bardzo pożyteczną cechą funkcji lambda jest skalowalność, funkcja automatycznie wykrywa potrzebę użycia większej ilości 
 zasobów i sama tym procesem zarządza. Jedynym zadaniem użytkownika jest więc dostarczenie kodu w jednym ze wspieranych przez
 AWS Lambda jezyku programowania 
+
+### Amazon API Gateway
+Amazon API Gateway jest serwisem, który umożliwia tworzenie, zarządzanie i monitorowanie API.
+Serwis pozwala na integracje systemów zewnętrznych z systemami AWS-owymi. API Gateway zarządza ruchem,
+autoryzuje końcowych użytkowników oraz pozwala na monitorowanie wywołań API
+
+
+
+
+
 
 # Architektura
 
