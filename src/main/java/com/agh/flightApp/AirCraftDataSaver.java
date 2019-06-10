@@ -28,7 +28,7 @@ public class AirCraftDataSaver implements RequestHandler<Request, Response> {
         float topSpeed = 0.0f;
         float topAltitude = 0.0f;
         try {
-            url = new URL("https://opensky-network.org/api/states/all");
+            url = new URL(input.getOpenSkyLink());
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             int status = con.getResponseCode();
@@ -48,8 +48,9 @@ public class AirCraftDataSaver implements RequestHandler<Request, Response> {
                 System.out.println("Czas: " + time);
 
                 JSONArray statesArray = jsonObj.getJSONArray("states");
-
+                System.out.println("Zaczynam parsowac " + time);
                 for (Object airplane : statesArray) {
+
                     JSONArray values = (JSONArray) airplane;
                     if (values.getBoolean(8)) {
                         samolotyNaZiemi++;
@@ -72,7 +73,7 @@ public class AirCraftDataSaver implements RequestHandler<Request, Response> {
                     }
                 }
             }
-            fluxUrl = new URL("http://ec2-54-93-232-40.eu-central-1.compute.amazonaws.com:8086/write?db=testDb");
+            fluxUrl = new URL("http://ec2-18-196-182-211.eu-central-1.compute.amazonaws.com:8086/write?db=testDb");
             HttpURLConnection con2 = (HttpURLConnection) fluxUrl.openConnection();
             con2.setDoOutput(true);
             con2.setRequestMethod("POST");
@@ -81,10 +82,10 @@ public class AirCraftDataSaver implements RequestHandler<Request, Response> {
 
             OutputStream os = con2.getOutputStream();
             OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
-            osw.write("samoloty,region=swiat naZiemi=" + samolotyNaZiemi + ",wPowietrzu=" + samolotyWPowietrzu + ",topSpeed=" + topSpeedKmH + ",topAltitude=" + topAltitude);
+            osw.write("samoloty,region="+ input.getRegion()+ " naZiemi=" + samolotyNaZiemi + ",wPowietrzu=" + samolotyWPowietrzu + ",topSpeed=" + topSpeedKmH + ",topAltitude=" + topAltitude);
             osw.flush();
             osw.close();
-            os.close();  //don't forget to close the OutputStream
+            os.close();
             con2.connect();
             response.setMessage(con2.getResponseMessage());
 
