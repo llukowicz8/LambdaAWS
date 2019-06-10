@@ -61,7 +61,44 @@ Poniższa mapa pokazuje zasięg OpenSky, stan na 9.06.2019.
 rysunek  + opis
 
 # Uruchomienie
-mvn clean package shade:shade
+
+### Przygotowanie
+
+Należy uruchomić instancje EC2. 
+Zainstalować na niej [InfluxDb](https://docs.influxdata.com/influxdb/v1.3/introduction/installation/?fbclid=IwAR32tuy6wIiEVf8aUdzU-DpUDCr4BGIb6kzAqw-zBdx5Um9n4mCQEoUArkk#hosting-on-aws) 
+```bash
+cat <<EOF | sudo tee /etc/yum.repos.d/influxdb.repo
+[influxdb]
+name = InfluxDB Repository - RHEL \$releasever
+baseurl = https://repos.influxdata.com/rhel/\$releasever/\$basearch/stable
+enabled = 1
+gpgcheck = 1
+gpgkey = https://repos.influxdata.com/influxdb.key
+EOF
+
+sudo yum install influxdb
+sudo service influxdb start
+sudo yum install influxdb
+sudo systemctl start influxdb
+```
+oraz [Grafana](https://grafana.com/docs/)
+```bash
+yum install -y https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.0.3-1.x86_64.rpm
+service grafana-server start
+/sbin/chkconfig --add grafana-server
+```
+
+
+### Funkcja Lambda
+
+
+
+Funkcje Lambda należy zbudować poniższym poleceniem.
+
+    mvn clean package shade:shade
+    
+Nastepnie zbudowany plik .jar znajdujący się w katalogu /target należy wgrać jako funkcje Lambda w konosli AWS.
+
 
 # Wygląd aplikacji
 
