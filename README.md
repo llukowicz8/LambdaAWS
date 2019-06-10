@@ -1,4 +1,4 @@
-mvn clean package shade:shade
+
 
 # Flight App
 
@@ -6,7 +6,7 @@ Aplikacja Flight App przedstawia statystyki dotyczące przestrzeni powietrznej. 
 statystyki ruchu powietrznego nad wybranymi krajami. Dane prezentowane są w przejrzystej formie wykresów.
 Flight App jest zasilany danymi pochodzącymi z [OpenSky REST API](https://opensky-network.org/apidoc/rest.html#) 
 
-# Funckjonalność
+# Funkcjonalność
 
 Aplikacja umożliwia odczytanie z wykresów takich statystyk jak:
 
@@ -43,3 +43,5 @@ dostosowanie reguł bezpieczeństwa do własnych potrzeb tak, aby użyte kompone
 
 rysunek  + opis
 
+# Uruchomienie
+mvn clean package shade:shade
