@@ -122,6 +122,15 @@ Funkcje Lambda należy zbudować poniższym poleceniem.
     
 Nastepnie zbudowany plik .jar znajdujący się w katalogu /target należy wgrać jako funkcje Lambda w konosli AWS.
 
+### Skrypty bash
+W celu uruchomienia skryptu w tle w systemie Amazon Linux AMI postawionego na Amazon EC2 należy wpisać:
+```bash
+nohup ./nazwaSkryptu.sh &
+```
+
+### S3
+Ostatnim etapem jest stworzenie bucketa w serwisie Amazon S3. Następnie wgrywamy do naszego bucketa plik index.html który zawiera elementy <iframe>, odwołujące się do Grafany uruchomionej w kontenerze EC2. Po wgraniu pliku przechodzimy do ustawień bucketa w sekcji 'Properties', tam włączamy opcję 'Static website hosting' z ustawionym 'Index document' na index.html. Należy także sprawdzić i ewentualnie sprawdzić ustawienia sekcji 'Permission' tak aby nasz bucket był dostępny publicznie.
+
 
 # Wygląd aplikacji
 
