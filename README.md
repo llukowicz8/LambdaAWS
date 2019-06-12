@@ -55,6 +55,7 @@ autoryzuje końcowych użytkowników oraz pozwala na monitorowanie wywołań API
 S3 (Simple Storage Service) to usługa pamięci masowej oferowana przez AWS. Pozwala przechowywać spore ilości danych oraz
 umożliwia łatwy dostęp do nich.
 Najczęściej używany jest do:
+
 * Backupu i archiwizacji
 * Analizy Big Data
 * Przechowywania i dystrybucji contentu
