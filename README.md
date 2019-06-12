@@ -50,28 +50,6 @@ Amazon API Gateway jest serwisem, który umożliwia tworzenie, zarządzanie i mo
 Serwis pozwala na integracje systemów zewnętrznych z systemami AWS-owymi. API Gateway zarządza ruchem,
 autoryzuje końcowych użytkowników oraz pozwala na monitorowanie wywołań API
 
-### AWS S3
-
-S3 (Simple Storage Service) to usługa pamięci masowej oferowana przez AWS. Pozwala przechowywać spore ilości danych oraz
-umożliwia łatwy dostęp do nich.
-Najczęściej używany jest do:
-
-* Backupu i archiwizacji
-* Analizy Big Data
-* Przechowywania i dystrybucji contentu
-* Disaster Recovery
-* Hostingu statycznych stron
-
-### Grafana
-Grafana to rozwiązanie open-source służące do analizowania i wizualizacji danych. Jest bardzo przydatnym narzedziem i wspiera
-wiele baz danych takich jak: Influxdb, Elasticsearch czy Zabbix. Oferuje bardzo przydatną funkcje, która pozwala na osadzenie
-wykresów grafany(iframe) na własnych stronach
-
-### InfluxDb
-InfluxDB to baza danych open-source przeznaczona do obsługi duzych wolumenów danych nastawiona na zapis danych. 
-Dlatego jest ona szeroko wykorzystywana w dziedzinie IoT oraz aplikacjach analizujacych dane w czasie rzeczywistym.  
-
-
 ### OpenSky REST API
 Sieć OpenSky została zainicjowana w 2012 r. przez naukowców z armasuisse (Szwajcaria), Uniwersytetu Kaiserslautern (Niemcy) i University of Oxford (UK). Celem było i nadal jest dostarczanie naukowcom wysokiej jakości danych o ruchu lotniczym. Obecnie sieć OpenSky stała się stowarzyszeniem non-profit z siedzibą w Szwajcarii i jest wspierana przez rosnącą liczbę kontrybutorów z przemysłu i środowisk akademickich. Naukowcy z różnych obszarów korzystają z danych dostarczanych przez ludzi z całego świata.
 
@@ -86,8 +64,7 @@ opis
 # Uruchomienie
 
 ### Przygotowanie
-
-Należy uruchomić instancje EC2. 
+Należy uruchomić instancje EC2 z system Amazon Linux AMI. 
 Zainstalować na niej [InfluxDb](https://docs.influxdata.com/influxdb/v1.3/introduction/installation/?fbclid=IwAR32tuy6wIiEVf8aUdzU-DpUDCr4BGIb6kzAqw-zBdx5Um9n4mCQEoUArkk#hosting-on-aws) 
 ```bash
 cat <<EOF | sudo tee /etc/yum.repos.d/influxdb.repo
@@ -111,16 +88,17 @@ service grafana-server start
 /sbin/chkconfig --add grafana-server
 ```
 
+Po zainstalowaniu należy także zedytować reguły dla ruchu przychodzącego dla naszego kontera, potrzebne są zezwolenia dla portów 3000, 8086, 8088. Konieczny jest reboot kontenera.
 
 ### Funkcja Lambda
-
-
-
 Funkcje Lambda należy zbudować poniższym poleceniem.
 
     mvn clean package shade:shade
     
-Nastepnie zbudowany plik .jar znajdujący się w katalogu /target należy wgrać jako funkcje Lambda w konsoli AWS.
+Nastepnie zbudowany plik .jar znajdujący się w katalogu /target należy wgrać jako funkcje Lambda w konosli AWS.
+
+### API Gateway
+Po stworzeniu funkcji lambda, przechodzimy do serwisu API Gateway i deifniujemy tam nowe REST API z metodą POST do naszej lambdy.
 
 ### Skrypty bash
 W celu uruchomienia skryptu w tle w systemie Amazon Linux AMI postawionego na Amazon EC2 należy wpisać:
@@ -129,7 +107,7 @@ nohup ./nazwaSkryptu.sh &
 ```
 
 ### S3
-Ostatnim etapem jest stworzenie bucketa w serwisie Amazon S3. Następnie wgrywamy do naszego bucketa plik index.html który zawiera elementy <iframe>, odwołujące się do Grafany uruchomionej w kontenerze EC2. Po wgraniu pliku przechodzimy do ustawień bucketa w sekcji 'Properties', tam włączamy opcję 'Static website hosting' z ustawionym 'Index document' na index.html. Należy także sprawdzić i ewentualnie sprawdzić ustawienia sekcji 'Permission' tak aby nasz bucket był dostępny publicznie.
+Ostatnim etapem jest stworzenie bucketa w serwisie Amazon S3. Następnie wgrywamy do naszego bucketa plik index.html który zawiera elementy <iframe>, odwołujące się do Grafany uruchomionej w kontenerze EC2. Po wgraniu pliku przechodzimy do ustawień bucketa w sekcji 'Properties', tam włączamy opcję 'Static website hosting' z ustawionym 'Index document' na index.html. Znajduje się tam link endpointu do naszej strony, który możemy wpisać w przeglądarkę. Należy także sprawdzić i ewentualnie przestawić ustawienia sekcji 'Permission' tak aby nasz bucket był dostępny publicznie.
 
 
 # Wygląd aplikacji
