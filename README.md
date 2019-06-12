@@ -62,6 +62,15 @@ Najczęściej używany jest do:
 * Disaster Recovery
 * Hostingu statycznych stron
 
+### Grafana
+Grafana to rozwiązanie open-source służące do analizowania i wizualizacji danych. Jest bardzo przydatnym narzedziem i wspiera
+wiele baz danych takich jak: Influxdb, Elasticsearch czy Zabbix. Oferuje bardzo przydatną funkcje, która pozwala na osadzenie
+wykresów grafany(iframe) na własnych stronach
+
+### InfluxDb
+InfluxDB to baza danych open-source przeznaczona do obsługi duzych wolumenów danych nastawiona na zapis danych. 
+Dlatego jest ona szeroko wykorzystywana w dziedzinie IoT oraz aplikacjach analizujacych dane w czasie rzeczywistym.  
+
 
 ### OpenSky REST API
 Sieć OpenSky została zainicjowana w 2012 r. przez naukowców z armasuisse (Szwajcaria), Uniwersytetu Kaiserslautern (Niemcy) i University of Oxford (UK). Celem było i nadal jest dostarczanie naukowcom wysokiej jakości danych o ruchu lotniczym. Obecnie sieć OpenSky stała się stowarzyszeniem non-profit z siedzibą w Szwajcarii i jest wspierana przez rosnącą liczbę kontrybutorów z przemysłu i środowisk akademickich. Naukowcy z różnych obszarów korzystają z danych dostarczanych przez ludzi z całego świata.
