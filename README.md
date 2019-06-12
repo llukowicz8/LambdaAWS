@@ -59,8 +59,6 @@ Poniższa mapa pokazuje zasięg OpenSky, stan na 9.06.2019.
 # Architektura
 ![architektura.png](https://github.com/llukowicz8/LambdaAWS/blob/master/architektura.png)
 
-opis
-
 # Uruchomienie
 
 ### Przygotowanie
