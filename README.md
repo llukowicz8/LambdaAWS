@@ -120,7 +120,7 @@ Funkcje Lambda należy zbudować poniższym poleceniem.
 
     mvn clean package shade:shade
     
-Nastepnie zbudowany plik .jar znajdujący się w katalogu /target należy wgrać jako funkcje Lambda w konosli AWS.
+Nastepnie zbudowany plik .jar znajdujący się w katalogu /target należy wgrać jako funkcje Lambda w konsoli AWS.
 
 ### Skrypty bash
 W celu uruchomienia skryptu w tle w systemie Amazon Linux AMI postawionego na Amazon EC2 należy wpisać:
