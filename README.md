@@ -63,14 +63,15 @@ Najczęściej używany jest do:
 
 
 ### OpenSky REST API
-Sieć OpenSky została zainicjowana w 2012 r. przez naukowców z armasuisse (Szwajcaria), Uniwersytetu Kaiserslautern (Niemcy) i University of Oxford (UK). Celem było i nadal jest ostarczanie naukowcom wysokiej jakości danych o ruchu lotniczym. Obecnie sieć OpenSky stała się stowarzyszeniem non-profit z siedzibą w Szwajcarii i jest wspierana przez rosnącą liczbę kontrybutorów z przemysłu i środowisk akademickich. Naukowcy z różnych obszarów korzystają z danych dostarczanych przez ludzi z całego świata.
+Sieć OpenSky została zainicjowana w 2012 r. przez naukowców z armasuisse (Szwajcaria), Uniwersytetu Kaiserslautern (Niemcy) i University of Oxford (UK). Celem było i nadal jest dostarczanie naukowcom wysokiej jakości danych o ruchu lotniczym. Obecnie sieć OpenSky stała się stowarzyszeniem non-profit z siedzibą w Szwajcarii i jest wspierana przez rosnącą liczbę kontrybutorów z przemysłu i środowisk akademickich. Naukowcy z różnych obszarów korzystają z danych dostarczanych przez ludzi z całego świata.
 
 Poniższa mapa pokazuje zasięg OpenSky, stan na 9.06.2019.
 ![zasiegOpenSky.png](https://github.com/llukowicz8/LambdaAWS/blob/master/zasiegOpenSky.png)
 
 # Architektura
+![architektura.png](https://github.com/llukowicz8/LambdaAWS/blob/master/architektura.png)
 
-rysunek  + opis
+opis
 
 # Uruchomienie
 
